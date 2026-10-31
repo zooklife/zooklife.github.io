@@ -123,6 +123,7 @@ body.on-project .rigs-view.open{display:flex;align-items:center;justify-content:
 .reel-close{position:absolute;top:calc(env(safe-area-inset-top,0px) + 16px);right:clamp(16px,3vw,32px);width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;font:400 26px/1 var(--sans);cursor:pointer;display:grid;place-items:center;transition:background .2s}
 .reel-close:hover{background:rgba(255,255,255,.22)}
 body.reel-open{overflow:hidden}
+.reel-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
 </style>
 </head>
 <body>
@@ -146,7 +147,7 @@ body.reel-open{overflow:hidden}
 <div class="reel-modal" id="reel-modal" role="dialog" aria-modal="true" aria-label="Showreel">
   <button class="reel-close" id="reel-close" type="button" aria-label="Cerrar">&times;</button>
   <div class="reel-box">
-    <video id="reel-video" controls playsinline preload="none" controlslist="nodownload"></video>
+    <iframe id="reel-iframe" src="" title="Showreel" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
   </div>
 </div>
 
@@ -377,30 +378,23 @@ Always learning. Always building.</p>
 
 <script>
 (function(){
+  var VIMEO_SRC='https://player.vimeo.com/video/1226353539?autoplay=1&title=0&byline=0&portrait=0&dnt=1';
   var modal=document.getElementById('reel-modal'),
-      v=document.getElementById('reel-video'),
+      ifr=document.getElementById('reel-iframe'),
       frame=document.getElementById('reel'),
       closeBtn=document.getElementById('reel-close'),
       last=null;
-  if(!modal||!v)return;
+  if(!modal||!ifr)return;
 
   function open(){
     last=document.activeElement;
-    if(!v.querySelector('source')){
-      ['reel.mp4','videos/reel.mp4'].forEach(function(src){
-        var s=document.createElement('source');s.src=src;s.type='video/mp4';v.appendChild(s);
-      });
-      v.load();
-    }
+    ifr.src=VIMEO_SRC;
     modal.classList.add('open');
     document.body.classList.add('reel-open');
-    v.currentTime=0;
-    var p=v.play();
-    if(p&&p.catch)p.catch(function(){});
     closeBtn.focus();
   }
   function close(){
-    v.pause();
+    ifr.src='';
     modal.classList.remove('open');
     document.body.classList.remove('reel-open');
     if(last&&last.focus)last.focus();
@@ -415,7 +409,7 @@ Always learning. Always building.</p>
   });
   closeBtn.addEventListener('click',close);
   modal.addEventListener('click',function(e){if(e.target===modal)close();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open')&&!document.fullscreenElement)close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))close();});
 })();
 </script>
 <script>
