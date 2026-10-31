@@ -29,7 +29,7 @@ section{padding:clamp(56px,9vh,100px) clamp(20px,6vw,72px)}
 .reel-frame{display:block;position:relative;width:100%;height:64svh;min-height:340px;max-height:680px;background:#000;cursor:pointer}
 .reel-cta{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;pointer-events:none}
 .cta-hit{display:grid;place-items:center;pointer-events:auto;cursor:pointer;padding:.15em .3em}
-.cta-word{grid-area:1/1;font-family:var(--round);font-weight:600;font-size:clamp(1.9rem,5.4vw,3.2rem);letter-spacing:.01em;color:#EDEAE4;white-space:nowrap;transition:opacity .4s ease}
+.cta-word{grid-area:1/1;font-family:var(--druk);font-weight:900;text-transform:uppercase;font-size:clamp(4.5rem,11vw,9rem);line-height:.85;letter-spacing:.01em;color:#EDEAE4;white-space:nowrap;transition:opacity .4s ease}
 .cta-play{opacity:1}
 .cta-reel{opacity:0}
 .cta-hit:hover .cta-play,.reel-frame:focus-visible .cta-play{opacity:0}
@@ -47,7 +47,7 @@ section{padding:clamp(56px,9vh,100px) clamp(20px,6vw,72px)}
 .avatar{width:100%;aspect-ratio:1;border-radius:6px;background:var(--bg-alt);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
 .avatar svg{width:46%;color:var(--dim)}
 .about h2{font-size:clamp(1.5rem,3vw,2.4rem);font-weight:500;line-height:1.3;max-width:46ch;margin-bottom:20px}
-.about p.sub{color:var(--dim);max-width:75ch;line-height:1.7;margin-bottom:22px}
+.about p.sub{color:var(--dim);max-width:75ch;line-height:1.7;margin-bottom:22px;text-align:justify;text-justify:inter-word;hyphens:auto}
 .tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
 .tags span{font-family:var(--sans);font-size:.72rem;border:1px solid var(--line);padding:6px 12px;border-radius:100px}
 .base{font-family:var(--sans);font-size:.8rem;color:var(--dim)}
@@ -83,12 +83,17 @@ section{padding:clamp(56px,9vh,100px) clamp(20px,6vw,72px)}
 .project-view .back:hover{color:var(--text)}
 .project-view h1{font-family:var(--druk);font-weight:900;font-size:clamp(3.5rem,8vw,9rem);line-height:.85;text-transform:uppercase;letter-spacing:.01em;color:var(--works-blue);margin-bottom:clamp(20px,4vh,40px)}
 .project-body{display:flex;align-items:flex-start;gap:clamp(24px,4vw,64px)}
-.project-body .video-slot{flex:0 1 960px;min-width:0}
+.project-body .video-slot{flex:0 1 960px;min-width:0;aspect-ratio:1920/720}
 .project-body .my-text{flex:1 1 220px;min-width:180px}
 @media(max-width:900px){.project-body{flex-direction:column}.project-body .video-slot,.project-body .my-text{flex:none;width:100%}}
 .project-view .my-text{margin-top:0;font-family:var(--sans);font-size:clamp(1rem,1.6vw,1.2rem);line-height:1.7;color:var(--text)}
 body.on-project .home-view{display:none}
 body.on-project .project-view.open{display:block}
+
+/* RIGS — página vacía con SOON en el centro */
+.rigs-view{min-height:calc(100svh - var(--nav-h));padding:0 clamp(20px,4vw,48px)}
+body.on-project .rigs-view.open{display:flex;align-items:center;justify-content:center}
+.rigs-view .rigs-soon{margin:0;text-align:center;font-family:var(--druk);font-weight:900;text-transform:uppercase;font-size:clamp(7rem,22vw,26rem);line-height:.85;letter-spacing:.01em;color:var(--works-blue)}
 
 /* FOOTER — contact, shown on every page */
 .site-footer{background:#ECEAE9;color:#141414;padding:clamp(40px,7vh,72px) clamp(20px,6vw,72px)}
@@ -234,7 +239,11 @@ Always learning. Always building.</p>
       </article>
       <article class="work-card">
         <div class="video-slot" data-label="Video 04">
-          <!-- Preview: <video src="videos/sinkrony-preview.mp4" autoplay muted loop playsinline></video> -->
+          <video data-autoplay autoplay muted loop playsinline disablepictureinpicture preload="auto"
+                 style="width:100%; height:100%; object-fit:cover; display:block;">
+            <source src="SinkronyWeb.mp4" type="video/mp4">
+            <source src="videos/SinkronyWeb.mp4" type="video/mp4">
+          </video>
         </div>
         <a class="work-link" href="#project-sinkrony" aria-label="Open project SINKRONY"></a>
         <h3 class="work-name">SINKRONY</h3>
@@ -254,7 +263,10 @@ Always learning. Always building.</p>
   <h1>STIGMA</h1>
   <div class="project-body">
   <div class="video-slot" data-label="STIGMA — project video">
-    <!-- Project video: <video src="videos/stigma.mp4" controls playsinline></video>  (or a Vimeo <iframe>) -->
+    <video data-autoplay autoplay muted loop playsinline disablepictureinpicture preload="none">
+      <source src="StigmaWeb.mp4" type="video/mp4">
+      <source src="videos/StigmaWeb.mp4" type="video/mp4">
+    </video>
   </div>
   <div class="my-text">MY TEXT</div>
   </div>
@@ -264,7 +276,10 @@ Always learning. Always building.</p>
   <h1>NEMESIS</h1>
   <div class="project-body">
   <div class="video-slot" data-label="NEMESIS — project video">
-    <!-- Project video: <video src="videos/nemesis.mp4" controls playsinline></video>  (or a Vimeo <iframe>) -->
+    <video data-autoplay autoplay muted loop playsinline disablepictureinpicture preload="none">
+      <source src="NemesisWeb.mp4" type="video/mp4">
+      <source src="videos/NemesisWeb.mp4" type="video/mp4">
+    </video>
   </div>
   <div class="my-text">MY TEXT</div>
   </div>
@@ -274,7 +289,10 @@ Always learning. Always building.</p>
   <h1>O´PARAISO</h1>
   <div class="project-body">
   <div class="video-slot" data-label="O´PARAISO — project video">
-    <!-- Project video: <video src="videos/oparaiso.mp4" controls playsinline></video>  (or a Vimeo <iframe>) -->
+    <video data-autoplay autoplay muted loop playsinline disablepictureinpicture preload="none">
+      <source src="OparaisoWeb.mp4" type="video/mp4">
+      <source src="videos/OparaisoWeb.mp4" type="video/mp4">
+    </video>
   </div>
   <div class="my-text">MY TEXT</div>
   </div>
@@ -284,10 +302,17 @@ Always learning. Always building.</p>
   <h1>SINKRONY</h1>
   <div class="project-body">
   <div class="video-slot" data-label="SINKRONY — project video">
-    <!-- Project video: <video src="videos/sinkrony.mp4" controls playsinline></video>  (or a Vimeo <iframe>) -->
+    <video data-autoplay autoplay muted loop playsinline disablepictureinpicture preload="none">
+      <source src="SinkronyWeb.mp4" type="video/mp4">
+      <source src="videos/SinkronyWeb.mp4" type="video/mp4">
+    </video>
   </div>
   <div class="my-text">MY TEXT</div>
   </div>
+</main>
+
+<main class="project-view rigs-view" id="rigs">
+  <h1 class="rigs-soon">Soon</h1>
 </main>
 
 <footer class="site-footer" id="contact">
