@@ -78,8 +78,8 @@ section{padding:clamp(56px,9vh,100px) clamp(20px,6vw,72px)}
 .about-section{--g:clamp(20px,3.6vh,56px);background:var(--nav-bg);display:flex;align-items:center;min-height:max(440px,calc(100svh - var(--nav-h) - 37px - .425 * var(--ab-fs)));padding-top:calc(.425 * var(--ab-fs) - 25px + var(--g));padding-bottom:var(--g)}
 .about-section .wrap{width:100%;max-width:1200px}
 .about{display:grid;grid-template-columns:260px 1fr;gap:clamp(28px,6vw,64px);align-items:center}
-.avatar{width:100%;aspect-ratio:1;border-radius:6px;background:var(--bg-alt);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
-.avatar svg{width:46%;color:var(--dim)}
+.avatar{width:100%;aspect-ratio:1;border-radius:6px;background:var(--bg-alt);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .about h2{font-size:clamp(1.5rem,3vw,2.4rem);font-weight:500;line-height:1.3;max-width:46ch;margin-bottom:20px}
 .about p.sub{color:var(--dim);max-width:75ch;line-height:1.7;margin-bottom:22px;text-align:justify;text-justify:inter-word;hyphens:none;-webkit-hyphens:none;word-break:normal;overflow-wrap:normal}
 .tags{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:22px}
@@ -221,8 +221,11 @@ body.reel-open{overflow:hidden}
 
 <section id="about" class="about-section">
 <div class="wrap about">
-<div class="avatar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zm0 2.5c-3.3 0-9.8 1.6-9.8 4.9V21h19.6v-1.6c0-3.3-6.5-4.9-9.8-4.9z"/></svg></div>
-<div>
+<section id="about" class="about-section">
+<div class="wrap about">
+<div class="avatar"><img src="retratosWeb.png" alt="Pablo Montero González"></div>
+</div>
+</section><div>
 <h2>PABLO MONTERO GONZÁLEZ</h2>
 <p class="sub">I am a 3D Character Rigger specialized in building <span style="white-space:nowrap">production ready</span> character rigs for animation, with a strong focus on facial rigging, deformation systems, and procedural rigging workflows. I enjoy creating efficient, <span style="white-space:nowrap">animator friendly</span> rigs using matrix nodes, modular systems, and clean <span style="white-space:nowrap">node based</span> setups that are scalable and easy to maintain. I am constantly exploring new rigging techniques, automation tools, and pipeline improvements to push both performance and quality. I also have experience with Python scripting, custom tools, and technical workflows that help streamline character production. I’m passionate about solving technical challenges while giving animators the controls they need to bring characters to life. Always learning. Always building.</p>
 <div class="tags"><span>Maya</span><span>Zbrush</span><span>Houdini</span><span>QT</span><span>Python</span></div>
