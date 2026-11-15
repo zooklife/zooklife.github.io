@@ -178,7 +178,64 @@ body.reel-open{overflow:hidden}
 
 </head>
 <body>
+<style>
+html.intro-lock,html.intro-lock body{overflow:hidden}
+#intro{position:fixed;inset:0;z-index:1000;background:#1F1F1F;display:grid;place-items:center;cursor:pointer;transition:background .8s ease,opacity .6s ease}
+#intro.clear{background:transparent}
+.intro-text{text-align:center;color:#fff;transition:opacity .5s ease,transform .8s ease}
+.intro-text.out{opacity:0;transform:scale(.95)}
+.intro-name{display:flex;justify-content:center;overflow:hidden;padding-bottom:.1em;font:700 clamp(2.6rem,9vw,9rem)/1 'Space Grotesk',system-ui,sans-serif;letter-spacing:-.02em}
+.intro-name span{display:inline-block;transform:translateY(110%);animation:introRise 1s cubic-bezier(.2,.8,.2,1) forwards}
+.intro-name .l{font-weight:400;color:#d6d6d6;animation-delay:.15s}
+.intro-sub{display:block;margin-top:1.1rem;font:500 clamp(.65rem,1vw,.9rem)/1 'Space Grotesk',system-ui,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#8B8F98;opacity:0;animation:introFade .8s .8s forwards}
+@keyframes introRise{to{transform:none}}
+@keyframes introFade{to{opacity:1}}
+.intro-media{position:fixed;left:0;top:0;width:0;height:0;overflow:hidden;opacity:0;background:#000}
+.intro-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+</style>
 
+<div id="intro" aria-hidden="true">
+<div class="intro-text">
+<div class="intro-name"><span>PABLO</span><span class="l">MONTERO</span></div>
+<small class="intro-sub">Rigging TD &amp; Tool Developer</small>
+</div>
+<div class="intro-media">
+<video autoplay muted loop playsinline preload="auto"><source src="reel.mp4" type="video/mp4"><source src="videos/reel.mp4" type="video/mp4"></video>
+</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+var intro=document.getElementById('intro'),hero=document.getElementById('reel');
+if(!intro)return;
+if(!hero||!hero.offsetWidth||matchMedia('(prefers-reduced-motion:reduce)').matches){intro.remove();return;}
+var root=document.documentElement,media=intro.querySelector('.intro-media'),
+text=intro.querySelector('.intro-text'),iv=media.querySelector('video'),hv=hero.querySelector('video');
+var TEXT=2000,DUR=2800,done=false,timers=[];
+function later(f,t){timers.push(setTimeout(f,t));}
+function end(){if(done)return;done=true;timers.forEach(clearTimeout);
+if(iv&&hv){try{hv.currentTime=iv.currentTime}catch(e){}}
+root.classList.remove('intro-lock');intro.style.opacity='0';
+setTimeout(function(){intro.remove()},650);}
+root.classList.add('intro-lock');scrollTo(0,0);
+intro.addEventListener('click',end);
+later(function(){
+var W=innerWidth,H=innerHeight,r=hero.getBoundingClientRect(),
+sw=Math.min(W*.24,380),sh=sw*720/1920;
+function K(l,t,w,h){return{left:l+'px',top:t+'px',width:w+'px',height:h+'px',opacity:1,easing:'cubic-bezier(.76,0,.24,1)'};}
+var s=K((W-sw)/2,(H-sh)/2,sw,sh);
+text.classList.add('out');
+media.animate([
+Object.assign({},s,{opacity:0}),
+Object.assign({offset:.12},s),
+Object.assign({offset:.6},K(0,0,W,H)),
+Object.assign({offset:1},K(r.left,r.top,r.width,r.height))
+],{duration:DUR,fill:'forwards'});
+later(function(){intro.classList.add('clear')},DUR*.6);
+later(end,DUR+100);
+},TEXT);
+});
+</script>
 <nav class="site-nav">
 <ul>
 <li><a href="#reel">Reel</a></li>
