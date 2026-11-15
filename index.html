@@ -173,6 +173,29 @@ body.reel-open{overflow:hidden}
 .tags{justify-content:center;margin-bottom:32px}
 .base{font-size:1.15rem}
 
+/* ===== MÓVIL ===== */
+@media(max-width:980px){
+  /* 5. iconos del banner: más espacio con el borde inferior */
+  .site-nav .nav-social{padding-bottom:18px}
+}
+
+@media(max-width:720px){
+  /* 1. primera franja (About) más corta */
+  .about-strip:not(.contact-strip){min-height:135px}
+
+  /* 3. segunda franja (Works) más corta */
+  .about-strip.works-strip{min-height:165px}
+
+  /* 2. About: texto arriba, foto abajo, etiquetas en una línea */
+  .about{grid-template-columns:1fr}
+  .avatar{order:2;margin:0 auto;width:140px}
+  .tags{flex-wrap:nowrap;gap:1.6vw}
+  .tags span{white-space:nowrap;font-size:clamp(.68rem,3.3vw,.85rem);padding:7px 2.6vw}
+
+  /* 4. CONTACT pegado al fondo beige */
+  .contact-strip h2{margin-bottom:-.075em}
+}
+
 </style>
 
 
